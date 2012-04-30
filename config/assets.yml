@@ -1,0 +1,6 @@
+package_assets: on
+
+javascripts:
+  timer.min:
+    - src/timer.js
+
