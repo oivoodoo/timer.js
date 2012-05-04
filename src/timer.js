@@ -4,7 +4,8 @@ var Timer = function(options) {
   this.action = typeof(options) === "function" ? options : options.action;
   this.name = options.name || this.guid();
   this.time = options.time || 1500;
-  this.step = options.step || 1.5;
+  this.step = options.step || 1.2;
+  this.max_time = options.max_time || 5 * 60 * 1000;
 
   Timer[this.name] = null;
 };
@@ -13,13 +14,20 @@ Timer.prototype.next = function(t) {
   var self = this;
 
   if (Timer[this.name] === null) {
+    var time = this.tick(t);
+
     Timer[this.name] = setTimeout(function() {
       self.action(function() {
         self.stop();
-        self.next(t * self.step);
+        self.next(time);
       });
-    }, t * this.step);
+    }, time);
   }
+};
+
+Timer.prototype.tick = function(t) {
+  var time = t * this.step;
+  return time >= this.max_time ? this.max_time : time;
 };
 
 Timer.prototype.start = function() {
