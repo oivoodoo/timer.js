@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Timer.js by oivoodoo</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Timer.js</h1>
+        <h2>timer.js for smart js polling</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/oivoodoo/timer.js/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/oivoodoo/timer.js/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/oivoodoo/timer.js" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>Javascript Timer</h1>
+
+<p>This library is very useful if you are going to create a periodic update with
+ajax requests or any long calculation function.</p>
+
+<p>Inteval time calculation:</p>
+
+<p>interval = time * step</p>
+
+<h2>Usage</h2>
+
+<div class="highlight">
+<pre>  <span class="kd">function</span> <span class="nx">getData</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/data'</span><span class="p">,</span> <span class="nx">success</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timer</span><span class="p">(</span><span class="nx">getData</span><span class="p">);</span>
+  <span class="nx">timer</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<div class="highlight">
+<pre>  <span class="kd">function</span> <span class="nx">longOperation</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">1000000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">);</span>
+    <span class="nx">success</span><span class="p">();</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timer</span><span class="p">({</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="nx">longOperation</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"long_operation"</span><span class="p">,</span>
+    <span class="nx">time</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">step</span><span class="o">:</span> <span class="mi">2</span>
+  <span class="p">});</span>
+  <span class="nx">timer</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<p>You can stop timer using method 'stop':</p>
+
+<div class="highlight">
+<pre>  <span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">succes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"how are you?"</span><span class="p">);</span>
+    <span class="nx">success</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">timer</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+
+  <span class="p">...</span> <span class="nx">a</span> <span class="nx">lot</span> <span class="nx">of</span> <span class="nx">operations</span>
+
+  <span class="nx">timer</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<h2>Example of usage</h2>
+
+<p><img src="http://dl.dropbox.com/u/4478062/projects/timer.png" alt="timer example"></p>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31430896-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
