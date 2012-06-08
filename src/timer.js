@@ -1,5 +1,6 @@
 var Timer = function(options) {
-  if (typeof(options.action) === "undefined") throw new Exception("Action should be specified");
+  if (typeof(options.action) === "undefined")
+    throw new Exception("Action should be specified");
 
   this.action = typeof(options) === "function" ? options : options.action;
   this.name = options.name || this.guid();
@@ -10,28 +11,33 @@ var Timer = function(options) {
   Timer[this.name] = null;
 };
 
-Timer.prototype.next = function(t) {
+Timer.prototype.calculate = function() {
+  this.time = this.step * this.time;
+  return this.time;
+};
+
+Timer.prototype.next = function() {
   var self = this;
 
   if (Timer[this.name] === null) {
-    var time = this.tick(t);
+    var time = this.tick();
 
     Timer[this.name] = setTimeout(function() {
       self.action(function() {
         self.stop();
-        self.next(time);
+        self.next();
       });
     }, time);
   }
 };
 
 Timer.prototype.tick = function(t) {
-  var time = t * this.step;
+  var time = this.calculate();
   return time >= this.max_time ? this.max_time : time;
 };
 
 Timer.prototype.start = function() {
-  this.next(this.time);
+  this.next();
 };
 
 Timer.prototype.stop = function() {
@@ -42,8 +48,8 @@ Timer.prototype.stop = function() {
 
 Timer.prototype.guid = function() {
   function S4() {
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
   }
-  return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 };
 

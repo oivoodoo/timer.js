@@ -49,3 +49,15 @@ You can stop timer using method 'stop':
   timer.stop();
 ```
 
+Define your own calculate function:
+
+```javascript
+  var timer = new Timer();
+  timer.calculate = function() {
+    this.time = 1.8 * this.time;
+
+    return this.time;
+  };
+  timer.start();
+```
+
